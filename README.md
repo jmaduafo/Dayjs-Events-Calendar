@@ -31,7 +31,11 @@ https://jmaduafo.github.io/Dayjs-Events-Calendar/Develop/
 
 For events in the past, the textarea box is gray, for the present, the textarea would be fully red, and events 
 in the future would be green. In this case, since it is past 8 PM, all events in the calendar are in the past, 
-thus they are all grayed out
+thus they are all grayed out.
+
+I also used dayjs to update the current time and used javascript logic to add the appropriate suffixes
+to the date (ex: "st", "nd", "rd", "th").
+
 <img width="1136" alt="dayjs-calendar1" src="https://user-images.githubusercontent.com/87540591/228046226-20844209-6093-46ed-a693-6ef10766ae39.png">
 
 
@@ -46,10 +50,5 @@ HTML and CSS by:
 https://github.com/coding-boot-camp/crispy-octo-meme
 by Georgeyoo
 
----
-
-## Features
-
-If your project has a lot of features, list them here.
 
 

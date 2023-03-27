@@ -3,64 +3,28 @@
 // in the html.
 $(function () {
   
-  // const LOCAL_STORAGE_EVENT_KEY = "events.selectedId";
-  // let events = Array.from(JSON.parse(localStorage.getItem(LOCAL_STORAGE_EVENT_KEY) || []));
-
-  
-
-
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-
-  const LOCAL_STORAGE_EVENT_KEY = "events.lists";
-  let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_EVENT_KEY)) || []
+  // Set the getItems above setItems and for each description id, retrieve the value
+  // for the appropriate id
+  for (let i = 0; i < 18; i++) {
+    $("#" + i).val(localStorage.getItem("hour-" + i))
+  }
 
   var saveBtn = $(".saveBtn");
 
-  console.log(lists.name)
-
-  
-  
-  saveBtn.on("click", function(e) {
+  // After the save button is clicked, assign the input as a value and
+  // the div element id as the id
+  saveBtn.on("click", function() {
     const listName = this.previousElementSibling.value;
+    const mainDivID = this.parentElement.id;
 
-    if (listName == null || listName === '') return
-    const list = createList(listName);
-    lists.push(list);    
-
-    var description = this.previousElementSibling
-
-    save();
-
-    lists.forEach(list => {
-      description.dataset.id = list.id;
-      description.innerText = list.name;
-    })
-
-    console.log(lists)
-      
+    localStorage.setItem(mainDivID, listName);      
 
   })
-  
-
-  function save() {
-    localStorage.setItem(LOCAL_STORAGE_EVENT_KEY, JSON.stringify(lists));
-  }
-  
-  
-  function createList(name) {
-    return {
-      id: Date.now().toString(),
-      name: name
-    }
-  }
-
-
 
 
   var today = '';
 
+  // Set the current time and add "st", "nd", "rd", and "th" after the appropriate numbers
   setInterval(function() {
     var current = dayjs();
     today = current.format("dddd, MMMM DD");
@@ -83,7 +47,10 @@ $(function () {
   // 24 hour format
   var nowH = dayjs().format("H");
 
+  // Assign the "past" class to the times before the current time
   function past() {
+    // Change nowH variable (the 24h format) from a string to a number and assign the past class to all time slots
+    // before the current time
     for (let i = +nowH - 1; i > 8; i--) {
       $("#hour-" + i).addClass("past");
       $("#hour-" + i).removeClass("future");
@@ -91,15 +58,28 @@ $(function () {
     }
   }
 
+  console.log($("#hour-" + nowH).children().eq(0).text().substring(0,1))
+
   function present() {
-    if (nowh === $("#hour-" + nowH).children().eq(0).text().substring(0,1)) {
+    // For all inner texts of the "hour" class with a length of 3 (ex: 9AM) that is the same as 
+    // the current time, set "present" class 
+    if (nowh === $("#hour-" + nowH).children().eq(0).text().substring(0,1) && $("#hour-" + nowH).children().eq(0).text().length === 3) {
+      $("#hour-" + nowH).removeClass("past");
+      $("#hour-" + nowH).removeClass("future");
+      $("#hour-" + nowH).addClass("present");
+    // For all inner texts of the "hour" class with a length of 4 (ex: 12AM) that is the same as 
+    // the current time, set "present" class 
+    } else if (nowh === $("#hour-" + nowH).children().eq(0).text().substring(0,2) && $("#hour-" + nowH).children().eq(0).text().length === 4) {
       $("#hour-" + nowH).removeClass("past");
       $("#hour-" + nowH).removeClass("future");
       $("#hour-" + nowH).addClass("present");
     }
   }
   
+  // Assign the "future" class to the times after the current time
   function future() {
+    // Change nowH variable (the 24h format) from a string to a number and assign the future class to all time slots
+    // after the current time
     for (let i = +nowH + 1; i < 18; i++) {
       $("#hour-" + i).removeClass("past");
       $("#hour-" + i).addClass("future");

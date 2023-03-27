@@ -28,13 +28,17 @@ Deployed application:
 
 https://jmaduafo.github.io/Dayjs-Events-Calendar/Develop/
 
-Provide instructions and examples for use. Include screenshots as needed.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
+For events in the past, the textarea box is gray, for the present, the textarea would be fully red, and events 
+in the future would be green. In this case, since it is past 8 PM, all events in the calendar are in the past, 
+thus they are all grayed out
+<img width="1136" alt="dayjs-calendar1" src="https://user-images.githubusercontent.com/87540591/228046226-20844209-6093-46ed-a693-6ef10766ae39.png">
 
-![alt text](assets/images/screenshot.png)
-Example: 
-![alt text](Develop/assets/images/horiseon-module1-screenshot-2.png)
+
+In this demo, it shows how the events are saved even after refresh.
+
+[screen-capture.webm](https://user-images.githubusercontent.com/87540591/228045788-dfef5d13-4857-406b-9bea-bec27f210b8c.webm)
+
 ## Credits
 
 HTML and CSS by:
